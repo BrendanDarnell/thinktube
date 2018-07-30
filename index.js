@@ -14,10 +14,12 @@ function getDataFromApi(searchterm,callback) {
 }
 
 
-function showThumbnail(url) {
+function showThumbnail(url,id) {
   $('.thumbnail-container').append(
     `<div class="thumbnail">
+      <a href="https://www.youtube.com/watch?v=${id}">
       <img src="${url}" alt="thumbnail">
+      </a>
     </div>`
   )
 }
@@ -25,9 +27,9 @@ function showThumbnail(url) {
 function renderResults(data) {
   data.items.map(function(item,index){
     let url = item.snippet.thumbnails.medium.url;
-    console.log(url);
-    showThumbnail(url);
-    console.log(index);
+    let id = item.id.videoId;
+    console.log(id);
+    showThumbnail(url,id);  
     
   })
 }
@@ -38,12 +40,11 @@ function handleUserSearch(){
     event.preventDefault();
     $('.thumbnail').remove();
     let searchterm = $('input').val();
-    console.log(searchterm);
     getDataFromApi(searchterm,renderResults);
     $('input').val(' ');
-
   })
 }
+
 
 $(handleUserSearch);
 
