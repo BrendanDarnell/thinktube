@@ -17,7 +17,7 @@ function getDataFromApi(searchterm,callback) {
 function showThumbnail(url,id) {
   $('.thumbnail-container').append(
     `<div class="thumbnail">
-      <a href="https://www.youtube.com/watch?v=${id}">
+      <a href="https://www.youtube.com/watch?v=${id}" aria-label="go to youtube site to watch video">
       <img src="${url}" alt="thumbnail">
       </a>
     </div>`
@@ -38,6 +38,7 @@ function renderResults(data) {
 function handleUserSearch(){
   $('button').on('click keypress', function(event){
     event.preventDefault();
+    $('.thumbnail-container').prop('hidden',false)
     $('.thumbnail').remove();
     let searchterm = $('input').val();
     getDataFromApi(searchterm,renderResults);
