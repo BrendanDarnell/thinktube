@@ -25,13 +25,17 @@ function showThumbnail(url,id) {
 }
 
 function renderResults(data) {
-  data.items.map(function(item,index){
+  if(data.items) { 
+    data.items.map(function(item,index){
     let url = item.snippet.thumbnails.medium.url;
     let id = item.id.videoId;
     console.log(id);
-    showThumbnail(url,id);  
-    
-  })
+    showThumbnail(url,id);    
+    })}
+
+  else {
+    $('.thumbnail-container').append('<h2>No results for your search.</h2>')
+  }
 }
 
 
